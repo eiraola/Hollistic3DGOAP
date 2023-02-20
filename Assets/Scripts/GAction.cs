@@ -9,7 +9,7 @@ using UnityEngine.AI;
     public string actionName = "Action";
     public float cost = 1.0f;
     public GameObject target;
-    public GameObject targetTag;
+    public string targetTag;
     public float duration = 0;
     public WorldState[] preConditions;
     public WorldState[] afterEffects;
