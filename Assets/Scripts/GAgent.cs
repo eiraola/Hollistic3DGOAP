@@ -37,7 +37,18 @@ public abstract class GAgent : MonoBehaviour
     {
         CheckPlanner();
     }
+
     private void CheckPlanner()
+    {
+        if (CurrentActionRunning())
+        {
+            return;
+        }
+        SetActionQueue();
+        HandleGoal();
+
+    }
+    private bool CurrentActionRunning()
     {
         if (currentAction != null && currentAction.running)
         {
@@ -49,8 +60,12 @@ public abstract class GAgent : MonoBehaviour
                     invoked = true;
                 }
             }
-            return;
+            return true;
         }
+        return false;
+    }
+    private void SetActionQueue()
+    {
         if (planner == null || actionQueue == null)
         {
             planner = gameObject.AddComponent<GPlanner>();
@@ -63,9 +78,12 @@ public abstract class GAgent : MonoBehaviour
                     currentGoal = sg.Key;
                     break;
                 }
-                
+
             }
         }
+    }
+    private void HandleGoal()
+    {
         if (actionQueue != null && actionQueue.Count == 0)
         {
             if (currentGoal.remove)
@@ -94,7 +112,6 @@ public abstract class GAgent : MonoBehaviour
                 actionQueue = null;
             }
         }
-
     }
     private void CompleteAction()
     {
