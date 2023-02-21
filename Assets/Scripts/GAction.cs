@@ -16,14 +16,14 @@ using UnityEngine.AI;
     public NavMeshAgent agent;
 
     public Dictionary<string, int> preconditions;
-    public Dictionary<string, int> effects;
+    public Dictionary<string, int> aftereffects;
 
     public GWorldStates agentBeliefs;
     public bool running = false;
     public GAction()
     {
         preconditions = new Dictionary<string, int>();
-        effects = new Dictionary<string, int>();
+        aftereffects = new Dictionary<string, int>();
     }
     public void Awake()
     {
@@ -39,7 +39,7 @@ using UnityEngine.AI;
         {
             foreach (WorldState w in afterEffects)
             {
-                effects.Add(w.key, w.value);
+                aftereffects.Add(w.key, w.value);
             }
         }
     }

@@ -65,20 +65,20 @@ public abstract class GAgent : MonoBehaviour
         return false;
     }
     private void SetActionQueue()
-    {
+    {int i = 0;
         if (planner == null || actionQueue == null)
         {
             planner = gameObject.AddComponent<GPlanner>();
             var sortedGoals = from entry in goals orderby entry.Value descending select entry;
             foreach (KeyValuePair<SubGoal, int> sg in sortedGoals)
             {
+                Debug.LogError(sortedGoals);
                 actionQueue = planner.Plan(actions, sg.Key.sgoals, null);
                 if (actionQueue != null)
                 {
                     currentGoal = sg.Key;
                     break;
                 }
-
             }
         }
     }

@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine.Rendering;
+using System.Collections;
 
 public class Node
 {
@@ -36,7 +37,30 @@ public class GPlanner : MonoBehaviour
         if (!success)
         {
             Debug.LogError("No PLAN");
+            return new Queue<GAction>();
         }
+        Node cheapest = GetCheapestLeaf(leaves);
+        Node n = cheapest;
+        List<GAction> result = GetCheapestLeafPath(n);
+        //After Creating the list of actions, we rebuild it as a queue
+        Queue<GAction> queue = new Queue<GAction>();
+        foreach (GAction action in result)
+        {
+            queue.Enqueue(action);
+        }
+        PrintPlan(queue);
+        return queue;
+    }
+    private void PrintPlan(Queue<GAction> queue)
+    {
+        Debug.LogError("The plan is: ");
+        foreach (GAction item in queue)
+        {
+            Debug.LogError("Q: " + item.actionName);
+        }
+    }
+    private Node GetCheapestLeaf(List<Node> leaves)
+    {
         Node cheapest = null;
         foreach (Node leaf in leaves)
         {
@@ -48,31 +72,24 @@ public class GPlanner : MonoBehaviour
             {
                 if (leaf.cost < cheapest.cost)
                 {
-                    cheapest = leaf;    
+                    cheapest = leaf;
                 }
             }
         }
+        return cheapest;
+    }
+    private List<GAction> GetCheapestLeafPath(Node cheapest)
+    {
         List<GAction> result = new List<GAction>();
-        Node n = cheapest;
-        while (n != null)
+        while (cheapest != null)
         {
-            if (n.action!= null)
+            if (cheapest.action != null)
             {
-                result.Insert(0,n.action);
+                result.Insert(0, cheapest.action);
             }
-            n = n.parent;
+            cheapest = cheapest.parent;
         }
-        Queue<GAction> queue = new Queue<GAction>();
-        foreach (GAction action in result)
-        {
-            queue.Enqueue(action);
-        }
-        Debug.LogError("The plan is: ");
-        foreach (GAction item in queue)
-        {
-            Debug.LogError("Q: "+ item.actionName);
-        }
-        return queue;
+        return result;
     }
     private bool BuildGraph( Node parent, List<Node> leaves, List<GAction> usableActions, Dictionary<string, int> goal)
     {
@@ -83,11 +100,11 @@ public class GPlanner : MonoBehaviour
             if (action.IsAchievableGiven(parent.state))
             {
                 Dictionary<string, int> currentState = new Dictionary<string, int>(parent.state);
-                foreach (KeyValuePair<string, int> eff in action.effects)
+                foreach (KeyValuePair<string, int> afterEffect in action.aftereffects)
                 {
-                    if (!currentState.ContainsKey(eff.Key))
+                    if (!currentState.ContainsKey(afterEffect.Key))
                     {
-                        currentState.Add(eff.Key, eff.Value);
+                        currentState.Add(afterEffect.Key, afterEffect.Value);
                     }
                 }
                 Node node = new Node(parent, parent.cost + action.cost, currentState, action);
