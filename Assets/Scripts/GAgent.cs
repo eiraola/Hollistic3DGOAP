@@ -20,8 +20,10 @@ public abstract class GAgent : MonoBehaviour
 {
     public List<GAction> actions = new List<GAction>();
     public Dictionary<SubGoal,int> goals = new Dictionary<SubGoal, int>();
+    public GWorldStates beliefs = new GWorldStates();
     GPlanner planner;
     Queue<GAction> actionQueue;
+    public GInventory inventory = new GInventory();
     public GAction currentAction;
     SubGoal currentGoal;
     bool invoked = false;
@@ -32,6 +34,7 @@ public abstract class GAgent : MonoBehaviour
         {
             actions.Add(act);
         }
+        
     }
     private void LateUpdate()
     {
@@ -68,11 +71,16 @@ public abstract class GAgent : MonoBehaviour
     {
         if (planner == null || actionQueue == null)
         {
+            if (planner)
+            {
+                Destroy(planner);
+                
+            }
             planner = gameObject.AddComponent<GPlanner>();
             var sortedGoals = from entry in goals orderby entry.Value descending select entry;
             foreach (KeyValuePair<SubGoal, int> sg in sortedGoals)
             {
-                actionQueue = planner.Plan(actions, sg.Key.sgoals, null);
+                actionQueue = planner.Plan(actions, sg.Key.sgoals, beliefs);
                 if (actionQueue != null)
                 {
                     currentGoal = sg.Key;
@@ -89,7 +97,10 @@ public abstract class GAgent : MonoBehaviour
             {
                 goals.Remove(currentGoal);
             }
+            Destroy(planner);
             planner = null;
+            
+
         }
         if (actionQueue != null && actionQueue.Count > 0)
         {

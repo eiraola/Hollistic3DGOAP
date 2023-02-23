@@ -18,11 +18,25 @@ public class Node
         this.state = new Dictionary<string, int>(allStates);
         this.action = action;
     }
+    public Node(Node parent, float cost, Dictionary<string, int> allStates,  Dictionary<string, int> beliefeStates, GAction action)
+    {
+        this.parent = parent;
+        this.cost = cost;
+        this.state = new Dictionary<string, int>(allStates);
+        foreach (KeyValuePair<string, int> item in beliefeStates)
+        {
+            if (!this.state.ContainsKey(item.Key))
+            {
+                this.state.Add(item.Key, item.Value);
+            }
+        }
+        this.action = action;
+    }
 }
 public class GPlanner : MonoBehaviour
 {
 
-    public Queue<GAction> Plan(List<GAction> actions, Dictionary<string, int> goal, WorldState states)
+    public Queue<GAction> Plan(List<GAction> actions, Dictionary<string, int> goal, GWorldStates beliefeStates)
     {
         List<GAction> usableActions = new List<GAction>();
         foreach (GAction action in actions) {
@@ -32,7 +46,7 @@ public class GPlanner : MonoBehaviour
             }
         }
         List<Node> leaves = new List<Node>();
-        Node start = new Node(null,0, GWorld.Instance.GetWorld().GetStates(), null);
+        Node start = new Node(null,0, GWorld.Instance.GetWorld().GetStates(), beliefeStates.states, null);
         string tag = gameObject.tag;
         Debug.LogError(gameObject.tag);
         if (start.state.Count != 0 && gameObject.CompareTag("Nurse"))

@@ -14,10 +14,11 @@ public class UpdateWorld : MonoBehaviour
     void LateUpdate()
     {
         Dictionary<string, int> worldstates = GWorld.Instance.GetWorld().GetStates();
-        states.text = "Nobody waiting";
+        states.text = "";
         foreach (KeyValuePair<string, int> state in worldstates)
         {
-            states.text += state.Key + " " + state.Value;
+            states.text += state.Key + " " + state.Value + System.Environment.NewLine
+                ;
         }
     }
 }

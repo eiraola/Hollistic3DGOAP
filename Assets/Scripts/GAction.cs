@@ -14,16 +14,17 @@ using UnityEngine.AI;
     public WorldState[] preConditions;
     public WorldState[] afterEffects;
     public NavMeshAgent agent;
-
+    public GInventory inventory;
     public Dictionary<string, int> preconditions;
     public Dictionary<string, int> aftereffects;
-
+    public GWorldStates beliefs;
     public GWorldStates agentBeliefs;
     public bool running = false;
     public GAction()
     {
         preconditions = new Dictionary<string, int>();
         aftereffects = new Dictionary<string, int>();
+
     }
     public void Awake()
     {
@@ -42,6 +43,8 @@ using UnityEngine.AI;
                 aftereffects.Add(w.key, w.value);
             }
         }
+        beliefs = GetComponent<GAgent>().beliefs;
+        inventory = this.GetComponent<GAgent>().inventory;
     }
     public bool IsAchievable()
     {

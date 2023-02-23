@@ -14,7 +14,7 @@ using UnityEngine;
     {
         GWorld.Instance.GetWorld().ModifyState("Waiting",1);
         GWorld.Instance.AddPatient(gameObject);
-
-      return true;
+        beliefs.ModifyState("atHospital", 1);
+        return true;
     }
 }
