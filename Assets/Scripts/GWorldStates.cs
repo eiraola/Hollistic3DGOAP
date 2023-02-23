@@ -31,10 +31,10 @@ public class GWorldStates
             {
                 RemoveState(key);
             }
-            else
-            {
-                states.Add(key, value);
-            }
+        }
+        else
+        {
+            states.Add(key, value);
         }
     }
     public void RemoveState(string key) {

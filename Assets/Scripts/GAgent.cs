@@ -65,14 +65,13 @@ public abstract class GAgent : MonoBehaviour
         return false;
     }
     private void SetActionQueue()
-    {int i = 0;
+    {
         if (planner == null || actionQueue == null)
         {
             planner = gameObject.AddComponent<GPlanner>();
             var sortedGoals = from entry in goals orderby entry.Value descending select entry;
             foreach (KeyValuePair<SubGoal, int> sg in sortedGoals)
             {
-                Debug.LogError(sortedGoals);
                 actionQueue = planner.Plan(actions, sg.Key.sgoals, null);
                 if (actionQueue != null)
                 {
@@ -95,7 +94,7 @@ public abstract class GAgent : MonoBehaviour
         if (actionQueue != null && actionQueue.Count > 0)
         {
             currentAction = actionQueue.Dequeue();
-            if (currentAction.PostPerform())
+            if (currentAction.PrePerform())
             {
                 if (currentAction.target == null && currentAction.targetTag != "")
                 {
@@ -112,6 +111,7 @@ public abstract class GAgent : MonoBehaviour
                 actionQueue = null;
             }
         }
+       
     }
     private void CompleteAction()
     {

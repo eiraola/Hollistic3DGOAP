@@ -33,11 +33,17 @@ public class GPlanner : MonoBehaviour
         }
         List<Node> leaves = new List<Node>();
         Node start = new Node(null,0, GWorld.Instance.GetWorld().GetStates(), null);
+        string tag = gameObject.tag;
+        Debug.LogError(gameObject.tag);
+        if (start.state.Count != 0 && gameObject.CompareTag("Nurse"))
+        {
+            Debug.LogError("xD");
+        }
         bool success = BuildGraph(start, leaves, usableActions, goal);
         if (!success)
         {
             Debug.LogError("No PLAN");
-            return new Queue<GAction>();
+            return  null;
         }
         Node cheapest = GetCheapestLeaf(leaves);
         Node n = cheapest;
