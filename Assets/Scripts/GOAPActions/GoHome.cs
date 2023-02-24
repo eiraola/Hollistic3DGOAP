@@ -13,6 +13,7 @@ using UnityEngine;
 
     public override bool PostPerform()
     {
+        Destroy(gameObject);
         beliefs.ModifyState("atHospital", -1);
         return true;
     }

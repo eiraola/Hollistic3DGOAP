@@ -1,18 +1,19 @@
-
 using UnityEngine;
 
 
-    public class GoToHospital : GAction
+    public class Rest : GAction
     {
 
 
     public override bool PrePerform()
     {
+
         return true;
     }
 
     public override bool PostPerform()
     {
-      return true;
+        beliefs.RemoveState("exhausted");
+        return true;
     }
 }

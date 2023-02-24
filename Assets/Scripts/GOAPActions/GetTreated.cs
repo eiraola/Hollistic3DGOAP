@@ -17,7 +17,8 @@ using UnityEngine;
 
     public override bool PostPerform()
     {
-        
+        GWorld.Instance.GetWorld().ModifyState("Treated" , 1);
+        beliefs.ModifyState("isCured", 1);
         inventory.RemoveItem(target);
       
       return true;

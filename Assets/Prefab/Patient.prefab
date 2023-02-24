@@ -2726,6 +2726,7 @@ GameObject:
   - component: {fileID: 2010250582}
   - component: {fileID: 2010250583}
   - component: {fileID: 1803251299}
+  - component: {fileID: 115200300}
   m_Layer: 0
   m_Name: Patient
   m_TagString: Untagged
@@ -2759,10 +2760,10 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 6
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 360
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -2874,13 +2875,38 @@ MonoBehaviour:
   cost: 1
   target: {fileID: 0}
   targetTag: 
-  duration: 0
+  duration: 4
   preConditions:
   - key: atHospital
     value: 1
   afterEffects:
   - key: isTreated
     value: 0
+  agent: {fileID: 0}
+  running: 0
+--- !u!114 &115200300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7881807149238628900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38b508d4c4448b24bab7786a16bfaae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Action
+  cost: 1
+  target: {fileID: 0}
+  targetTag: Home
+  duration: 0
+  preConditions:
+  - key: isCured
+    value: 1
+  afterEffects:
+  - key: isAtHome
+    value: 1
   agent: {fileID: 0}
   running: 0
 --- !u!1 &7927236269272520591

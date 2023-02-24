@@ -12,6 +12,9 @@ TagManager:
   - Reception
   - WArea
   - Nurse
+  - Office
+  - Doctor
+  - Toilet
   layers:
   - Default
   - TransparentFX
