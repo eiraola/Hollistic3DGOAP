@@ -2727,6 +2727,7 @@ GameObject:
   - component: {fileID: 2010250583}
   - component: {fileID: 1803251299}
   - component: {fileID: 115200300}
+  - component: {fileID: 8572009890033470277}
   m_Layer: 0
   m_Name: Patient
   m_TagString: Untagged
@@ -2906,6 +2907,33 @@ MonoBehaviour:
     value: 1
   afterEffects:
   - key: isAtHome
+    value: 1
+  agent: {fileID: 0}
+  running: 0
+--- !u!114 &8572009890033470277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7881807149238628900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1bc4358cf80cac4181eeb4056bddf95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Action
+  cost: 1
+  target: {fileID: 0}
+  targetTag: 
+  duration: 3
+  preConditions:
+  - key: peeing
+    value: 1
+  - key: FreeToilet
+    value: 1
+  afterEffects:
+  - key: peed
     value: 1
   agent: {fileID: 0}
   running: 0

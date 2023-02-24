@@ -1341,6 +1341,8 @@ MonoBehaviour:
   preConditions:
   - key: peeing
     value: 1
+  - key: FreeToilet
+    value: 1
   afterEffects:
   - key: peed
     value: 1
@@ -5559,11 +5561,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Patient
       objectReference: {fileID: 0}
-    - target: {fileID: 7881807149238628900, guid: d36c43225f9391e4c8810c98eb7ef85e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d36c43225f9391e4c8810c98eb7ef85e, type: 3}
 --- !u!1001 &2066427523
@@ -5754,6 +5751,18 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 669346817}
+    - target: {fileID: 2074435122, guid: 51e437be22296b340954bf6591a60065, type: 3}
+      propertyPath: preConditions.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2074435122, guid: 51e437be22296b340954bf6591a60065, type: 3}
+      propertyPath: preConditions.Array.data[1].key
+      value: FreeToilet
+      objectReference: {fileID: 0}
+    - target: {fileID: 2074435122, guid: 51e437be22296b340954bf6591a60065, type: 3}
+      propertyPath: preConditions.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 177407082141715887, guid: 51e437be22296b340954bf6591a60065,
         type: 3}
       propertyPath: m_RootOrder

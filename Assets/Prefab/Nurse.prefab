@@ -1048,6 +1048,7 @@ GameObject:
   - component: {fileID: 2074435117}
   - component: {fileID: 2074435119}
   - component: {fileID: 2074435121}
+  - component: {fileID: 2074435122}
   m_Layer: 0
   m_Name: Nurse
   m_TagString: Nurse
@@ -1182,6 +1183,31 @@ MonoBehaviour:
   afterEffects:
   - key: rested
     value: 0
+  agent: {fileID: 0}
+  running: 0
+--- !u!114 &2074435122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2618188073631541129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1bc4358cf80cac4181eeb4056bddf95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Action
+  cost: 1
+  target: {fileID: 0}
+  targetTag: 
+  duration: 3
+  preConditions:
+  - key: peeing
+    value: 1
+  afterEffects:
+  - key: peed
+    value: 1
   agent: {fileID: 0}
   running: 0
 --- !u!1 &2629889911763255196
