@@ -116,6 +116,7 @@ public abstract class GAgent : MonoBehaviour
                 }
                 if (currentAction.target != null)
                 {
+                   
                     currentAction.running = true;
                     currentAction.agent.SetDestination(currentAction.target.transform.position);
                 }

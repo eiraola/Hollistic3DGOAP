@@ -19,9 +19,8 @@ using UnityEngine;
     public override bool PostPerform()
     {
         GWorld.Instance.GetWorld().ModifyState("TreatingPatient", 1);
-        GWorld.Instance.AddCubicles(target);
+        GWorld.Instance.GetQueue(EResourceType.Cubicle).AddResource(target,GWorld.Instance.GetWorld());
         inventory.RemoveItem(target);
-        GWorld.Instance.GetWorld().ModifyState("FreeCubicle", 1);
         return true;
     }
 }

@@ -14,6 +14,7 @@ using UnityEngine;
             goals.Add(s2, 5);
             goals.Add(s3, 7);
             goals.Add(s4, 8);
+        
         Invoke("GetPeeing", Random.Range(1, 10));
     }
     void GetPeeing()

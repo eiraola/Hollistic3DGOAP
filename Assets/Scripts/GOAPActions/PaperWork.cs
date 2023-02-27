@@ -7,7 +7,7 @@ using UnityEngine;
 
     public override bool PrePerform()
     {
-        target = GWorld.Instance.RemoveOffice();
+        target = GWorld.Instance.GetQueue(EResourceType.Office).RemoveResource(GWorld.Instance.GetWorld());
         if (target == null) {
             return false;
         }
@@ -18,8 +18,7 @@ using UnityEngine;
 
     public override bool PostPerform()
     {
-        
-        GWorld.Instance.AddOffice(target);
+        GWorld.Instance.GetQueue(EResourceType.Office).AddResource(target, GWorld.Instance.GetWorld());
         inventory.RemoveItem(target);
         return true;
     }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 
     public class GoToPee : GAction
@@ -7,7 +8,7 @@ using UnityEngine;
 
     public override bool PrePerform()
     {
-        target = GWorld.Instance.RemoveToilet();
+        target = GWorld.Instance.GetQueue(EResourceType.Toilet).RemoveResource(GWorld.Instance.GetWorld());
         if (target == null) return false;
         inventory.AddItem(target);
         return true;
@@ -15,7 +16,7 @@ using UnityEngine;
 
     public override bool PostPerform()
     {
-        GWorld.Instance.AddToilet(target);
+        GWorld.Instance.GetQueue(EResourceType.Toilet).AddResource(target, GWorld.Instance.GetWorld());
         inventory.RemoveItem(target);
         target= null;
         beliefs.RemoveState("peeing");
