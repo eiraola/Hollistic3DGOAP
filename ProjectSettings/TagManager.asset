@@ -15,6 +15,8 @@ TagManager:
   - Office
   - Doctor
   - Toilet
+  - Puddle
+  - JRoom
   layers:
   - Default
   - TransparentFX

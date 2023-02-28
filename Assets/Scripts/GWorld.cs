@@ -8,7 +8,8 @@ public enum EResourceType
     Patient,
     Office,
     Toilet,
-    Cubicle
+    Cubicle,
+    Puddle
 }
 public class ResourceQueue
 {
@@ -54,6 +55,7 @@ public sealed class GWorld
     private static ResourceQueue cubicles;
     private static ResourceQueue offices;
     private static ResourceQueue toilets;
+    private static ResourceQueue puddles;
     private static Dictionary<EResourceType, ResourceQueue> resources = new Dictionary<EResourceType, ResourceQueue>();
     static GWorld()
     {
@@ -62,11 +64,13 @@ public sealed class GWorld
         cubicles = new ResourceQueue("Cubicle", "FreeCubicle", world);
         offices = new ResourceQueue("Office", "FreeOffice", world);
         toilets = new ResourceQueue("Toilet", "FreeToilet", world);
+        puddles = new ResourceQueue("Puddle", "ActivePuddle", world);
         GameObject[] cubes = GameObject.FindGameObjectsWithTag("Cubicle");
         resources.Add(EResourceType.Patient, patients);
         resources.Add(EResourceType.Cubicle, cubicles);
         resources.Add(EResourceType.Office, offices);
         resources.Add(EResourceType.Toilet, toilets);
+        resources.Add(EResourceType.Puddle, puddles);
 
     }
     private GWorld() { }
